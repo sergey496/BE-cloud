@@ -1,16 +1,17 @@
 import type { AWS } from '@serverless/typescript';
-
-import getProductById from '@functions/get-product-by-id';
+import getProductsById from '@functions/getProductsById';
+import getProductsList from '@functions/getProductsList';
 
 const serverlessConfiguration: AWS = {
-  service: 'product-list-by-id',
+  service: 'product-service1',
   frameworkVersion: '3',
   plugins: ['serverless-esbuild', 'serverless-auto-swagger'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
-    region: 'eu-west-1',
     stage: 'dev',
+    region: 'eu-west-1',
+
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -18,10 +19,12 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      PRODUCTS_TABLE: 'products',
+      STOCKS_TABLE: 'stocks'
     },
   },
-  // import the function via paths
-  functions: { getProductById },
+
+  functions: { getProductsList, getProductsById },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -34,9 +37,6 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10,
     },
-    autoswagger: {
-      title: 'product-list-by-id',
-    }
   },
 };
 
