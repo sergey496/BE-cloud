@@ -14,7 +14,6 @@ const putItem = async (tableName: string, item: { [key: string]: AWS.DynamoDB.At
 
 (async () => {
     try {
-        // populate 'products' table
         for (const product of productList) {
             const item = {
                 'id': { S: product.id },
@@ -27,7 +26,6 @@ const putItem = async (tableName: string, item: { [key: string]: AWS.DynamoDB.At
             await putItem('products', item);
         }
 
-        // populate 'stocks' table
         for (const product of productList) {
             const item = {
                 'product_id': { S: product.id },
