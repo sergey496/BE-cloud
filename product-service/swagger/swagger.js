@@ -2,7 +2,7 @@
             module.exports = {
   "swagger": "2.0",
   "info": {
-    "title": "product-service1",
+    "title": "product-service2",
     "version": "1"
   },
   "paths": {
@@ -11,6 +11,23 @@
         "summary": "getProductsList",
         "description": "",
         "operationId": "getProductsList.get.products",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "200 response"
+          }
+        }
+      },
+      "post": {
+        "summary": "createProduct",
+        "description": "",
+        "operationId": "createProduct.post.products",
         "consumes": [
           "application/json"
         ],
